@@ -1,0 +1,34 @@
+{
+	"name": "Terraform Module",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/aws-cli:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/devcontainers-extra/features/terraform-docs:1": {}
+
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.bracketPairColorization.enabled": true,
+				"editor.insertSpaces": true,
+				"editor.detectIndentation": false,
+				"editor.tabSize": 4,
+				"files.encoding": "utf8",
+				"[jsonc]": {
+					"editor.defaultFormatter": "vscode.json-language-features",
+					"editor.tabSize": 2
+				},
+				"[terraform]": {
+					"editor.tabSize": 2
+				},
+				"terminal.integrated.scrollback": 20000
+			}
+		}
+	},
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+	]
+}
