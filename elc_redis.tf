@@ -49,7 +49,7 @@ resource "aws_elasticache_serverless_cache" "add_on" {
   count                    = var.create_redis ? 1 : 0
   name                     = var.redis_name
   engine                   = "redis"
-  subnet_ids               = var.subnets_ids
+  subnet_ids               = split(",", replace(var.subnets_ids, " ", ""))
   snapshot_retention_limit = var.snapshot_retention
   security_group_ids       = [aws_security_group.redis[0].id]
   user_group_id            = aws_elasticache_user_group.add_on[0].user_group_id

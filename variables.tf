@@ -39,22 +39,20 @@ variable "vpc_id" {
 
 variable "subnets_ids" {
   description = "List of subnet IDs where the resources will be deployed"
-  type        = list(string)
+  type        = string
 }
 
 variable "source_cidrs" {
-  type        = list(string)
+  type        = string
   description = "List of CIDRs that will be allowed to access the Redis cluster"
 }
 
 variable "snapshot_retention" {
   type        = number
   description = "The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis"
-  default     = 1
 }
 
 variable "size_storage" {
   description = "The maximum data storage limit in the cache, expressed in Gigabytes"
   type        = number
-  default     = 10
 }

@@ -8,7 +8,7 @@ resource "aws_security_group" "redis" {
     from_port   = 6379
     to_port     = 6379
     protocol    = "tcp"
-    cidr_blocks = var.source_cidrs
+    cidr_blocks = split(",", replace(var.source_cidrs, " ", ""))
   }
 
   egress {
