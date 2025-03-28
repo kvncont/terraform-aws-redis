@@ -1,6 +1,6 @@
 resource "aws_security_group" "redis" {
   count       = var.create_redis ? 1 : 0
-  name        = lower("${var.redis_name}-sg")
+  name        = lower("${local.redis_name}-sg")
   description = "Security group for Redis"
   vpc_id      = var.vpc_id
 

@@ -5,7 +5,7 @@ ephemeral "random_password" "redis" {
 }
 
 resource "aws_secretsmanager_secret" "redis" {
-  name = lower("${local.app_name}/redis-${var.redis_name}")
+  name = lower("${local.app_name}/redis-${local.redis_name}")
 }
 
 resource "aws_secretsmanager_secret_version" "redis" {
@@ -47,7 +47,7 @@ resource "aws_elasticache_user_group" "add_on" {
 
 resource "aws_elasticache_serverless_cache" "add_on" {
   count                    = var.create_redis ? 1 : 0
-  name                     = var.redis_name
+  name                     = local.redis_name
   engine                   = "redis"
   subnet_ids               = split(",", replace(var.subnets_ids, " ", ""))
   snapshot_retention_limit = var.snapshot_retention
@@ -67,7 +67,7 @@ resource "aws_elasticache_serverless_cache" "add_on" {
 
 data "aws_elasticache_serverless_cache" "add_on" {
   count = var.create_redis ? 0 : 1
-  name  = var.redis_name
+  name  = local.redis_name
 }
 
 resource "aws_elasticache_user_group_association" "add_on" {
