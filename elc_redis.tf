@@ -5,7 +5,8 @@ ephemeral "random_password" "redis" {
 }
 
 resource "aws_secretsmanager_secret" "redis" {
-  name = lower("${local.app_name}/redis-${local.redis_name}")
+  name                           = lower("${local.app_name}/redis-${local.redis_name}")
+  force_overwrite_replica_secret = true
 }
 
 resource "aws_secretsmanager_secret_version" "redis" {
